@@ -41,8 +41,9 @@ build {
   provisioner "shell" {
     inline = [
         "sudo yum install -y yum-utils",
-        "sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo",
-        "sudo yum -y install consul"
+        "wget https://releases.hashicorp.com/consul/1.9.5/consul_1.9.5_linux_amd64.zip",
+        "unzip consul_1.9.5_linux_amd64.zip",
+        "sudo mv consul /usr/local/bin/"
     ]
   }
 }
