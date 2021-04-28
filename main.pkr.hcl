@@ -24,7 +24,7 @@ source "amazon-ebs" "main" {
 
   security_group_filter {
       filters = {
-          "vpc-id": "sandbox1-main-vpc"
+          "vpc-id": "vpc-046340e71f03ad85e"
           "group-id": "sg-07d5022d92074a96a",
       }
   }
@@ -36,7 +36,7 @@ build {
     sources = ["source.amazon-ebs.main"]
 
   provisioner "shell" {
-    inline = ["yum update -y"]
+    inline = ["sudo yum update -y"]
   }
   provisioner "shell" {
     inline = [
