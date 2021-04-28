@@ -33,7 +33,7 @@ pipeline {
         stage('Download Code') {
             steps {
                 dir ("${WORKSPACE}/packer"){
-                    git branch: 'develop', credentialsId:'GithubToken', url: "git@github.com:sce81/pkr-build-consul.git"
+                    git branch: 'develop', credentialsId:'GithubToken', url: "https://github.com/sce81/pkr-build-consul.git"
                 }
 
             }
