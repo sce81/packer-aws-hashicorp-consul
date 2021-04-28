@@ -2,7 +2,7 @@ pipeline {
 
     agent { 
         node {
-            label 'infrastructure'
+            label 'Packer'
         }
     }
 
@@ -17,7 +17,7 @@ pipeline {
             steps {
                 // send build started notifications
                 //slackSend (channel: '#build-notifications', color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' ${env.BUILD_URL}")
-                //echo "${IMAGE}"
+                echo "blah"
             }
         }    
 
