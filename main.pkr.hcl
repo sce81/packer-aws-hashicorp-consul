@@ -16,11 +16,26 @@ source "amazon-ebs" "main" {
   }
   ssh_username  = "ec2-user"
   ssh_interface = "private_ip"
+  ebs_optimized = true
 
 
 
-  vpc_id        = "vpc-046340e71f03ad85e"
-  subnet_id     = "subnet-0b569d5cb05c972e2"
+  vpc_filter {
+      filters = {
+          "tag:Name": "sandbox1-main-vpc"
+      }
+  }
+
+  subnet_filter {
+    random = true
+    filters = {
+        "tag:Environment": "sandbox1",
+        "tag:Name": "sandbox1-core-*"
+    }
+  }  
+//  vpc_id        = "vpc-046340e71f03ad85e"
+//  subnet_id     = "subnet-0b569d5cb05c972e2"
+
 
   security_group_filter {
       filters = {
