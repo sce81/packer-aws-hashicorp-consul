@@ -1,6 +1,6 @@
 variable "name"                 {
     type            = string
-    default         = "packer"
+    default         = "consul"
     description     = "name of compontent being built"
     sensitive       = false
 }
@@ -19,6 +19,11 @@ variable "region"               {
 variable "env"               {
     type            = string
     default         = "dev"
-    description     = "environment name for tagging purposes"
+    description     = "environment name"
+    sensitive       = false
+}
+variable "jenkins_build_id" {
+    default         = "00"
+    description     = "Jenkins Build Number"
     sensitive       = false
 }

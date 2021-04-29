@@ -44,9 +44,9 @@ pipeline {
             steps {
                 script{
                     dir ("${WORKSPACE}/packer"){
-                    sh "packer build . | tee build.log"
+                    sh "packer build . -var 'jenkins_build_id=${env.BUILD_NUMBER}' | tee build.log"
                     sh "tail -1 build.log |  rev | awk '{print \$1}' | rev > artifact.txt"
-                        }
+                    }
                 }
             }
         }
