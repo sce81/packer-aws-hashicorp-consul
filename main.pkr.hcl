@@ -46,6 +46,7 @@ source "amazon-ebs" "main" {
         Name              = local.ami_name
         BuiltBy           = "Packer"
         App               = var.name
+        AppVersion        = var.app_version
         Environment       = var.env
         ManagedBy         = "Rackspace"
         JenkinsBuildID    = var.jenkins_build_id
