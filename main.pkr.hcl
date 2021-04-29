@@ -1,6 +1,6 @@
 source "amazon-ebs" "main" {
   profile         = "raxaws"
-  ami_name        = "${var.name} ${local.timestamp}"
+  ami_name        = local.ami_name
   ami_description = "${var.name}-${var.env}-${local.timestamp}"
 
   instance_type = var.instancetype
@@ -43,7 +43,7 @@ source "amazon-ebs" "main" {
   }
 
     tags = {
-        Name              = "${var.ami_name}-${formatdate("YYYYMMDDhhmmss", timestamp())}"
+        Name              = "${local.ami_name}-${formatdate("YYYYMMDDhhmmss", timestamp())}"
         BuiltBy           = "Packer"
         App               = var.name
         Environment       = var.env
