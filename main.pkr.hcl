@@ -1,6 +1,6 @@
 source "amazon-ebs" "main" {
   profile         = "raxaws"
-  ami_name        = local.ami_name
+  ami_name        = "${local.ami_name}-${var.jenkins_build_id}"
   ami_description = "${var.name}-${var.env}-${local.timestamp}"
 
   instance_type = var.instancetype
@@ -43,7 +43,7 @@ source "amazon-ebs" "main" {
   }
 
     tags = {
-        Name              = "${local.ami_name}-${formatdate("YYYYMMDDhhmmss", timestamp())}"
+        Name              = local.ami_name
         BuiltBy           = "Packer"
         App               = var.name
         Environment       = var.env
@@ -68,8 +68,8 @@ build {
   provisioner "shell" {
     inline = [
               "sudo yum install -y yum-utils",
-              "wget https://releases.hashicorp.com/consul/1.9.5/consul_1.9.5_linux_amd64.zip",
-              "unzip consul_1.9.5_linux_amd64.zip",
+              "wget https://releases.hashicorp.com/consul/${var.app_version}/consul_${var.app_version}_linux_amd64.zip",
+              "unzip consul_${var.app_version}_linux_amd64.zip",
               "sudo mv consul /usr/local/bin/"
     ]
   }

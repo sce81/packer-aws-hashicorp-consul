@@ -1,7 +1,13 @@
 variable "name"                 {
     type            = string
-    default         = "consul"
+    default         = "Consul"
     description     = "name of compontent being built"
+    sensitive       = false
+}
+variable "app_version"         {
+    type            = string
+    default         = "00"
+    description     = "Version of App deployed"
     sensitive       = false
 }
 variable "instancetype"         {
