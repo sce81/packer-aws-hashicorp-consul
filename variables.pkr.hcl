@@ -29,7 +29,7 @@ variable "env"               {
     sensitive       = false
 }
 variable "jenkins_build_id" {
-    default         = "00"
+    default         = "0000"
     description     = "Jenkins Build Number"
     sensitive       = false
 }
