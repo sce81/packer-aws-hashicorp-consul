@@ -73,6 +73,9 @@ build {
               "wget https://releases.hashicorp.com/consul/${var.app_version}/consul_${var.app_version}_linux_amd64.zip",
               "unzip consul_${var.app_version}_linux_amd64.zip",
               "sudo mv consul /usr/local/bin/"
+              "mkdir -p ~/.aws/"
+              "echo '[default]' > ~/.aws/config"
+              "echo 'region = REGION' >> ~/.aws/config"
     ]
   }
 }
