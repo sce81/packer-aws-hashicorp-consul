@@ -59,35 +59,38 @@ source "amazon-ebs" "main" {
 
 
 build {
-    sources = ["source.amazon-ebs.main"]
+  sources = ["source.amazon-ebs.main"]
+  
+  provisioner "file" {
+    source      = "files/bootstrap.json"
+    destination = "/etc/consul.d/bootstrap/config.json"
+  }
+  
+  provisioner "shell" {
+    inline = [
+        "sleep 2",
+        "sudo yum update -y"
+    ]
+  }
 
   provisioner "shell" {
     inline = [
-              "sleep 2",
-              "sudo yum update -y"
-    ]
-  }
-  provisioner "shell" {
-    inline = [
-              "sudo yum install -y yum-utils",
-              "wget https://releases.hashicorp.com/consul/${var.app_version}/consul_${var.app_version}_linux_amd64.zip",
-              "unzip consul_${var.app_version}_linux_amd64.zip",
-              "sudo mv consul /usr/local/bin/",
-              "mkdir -p ~/.aws/",
-              "echo '[default]' > ~/.aws/config",
-              "echo 'region = REGION' >> ~/.aws/config"
+        "sudo yum install -y yum-utils",
+        "wget https://releases.hashicorp.com/consul/${var.app_version}/consul_${var.app_version}_linux_amd64.zip",
+        "unzip consul_${var.app_version}_linux_amd64.zip",
+        "sudo mv consul /usr/local/bin/",
+        "mkdir -p ~/.aws/",
+        "echo '[default]' > ~/.aws/config",
+        "echo 'region = REGION' >> ~/.aws/config"
     ]
   }
   provisioner "shell" {
     inline = [
         "sudo adduser consul",
-        "mkdir -p /etc/consul.d/{bootstrap,server,client}",
-        "mkdir /var/consul",
-        "sudo chown consul:consul /var/consul"
+        "sudo mkdir -p /etc/consul.d/{bootstrap,server,client}",
+        "sudo mkdir /var/consul",
+        "sudo chown -R consul:consul /var/consul"
     ]
   }
-  provisioner "file" {
-    source      = "files/bootstrap.json"
-    destination = "/etc/consul.d/bootstrap/config.json"
-  }
+
 }

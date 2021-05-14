@@ -43,14 +43,16 @@ pipeline {
         stage('Packer Build'){
             steps {
                 script{
-                    try {
-                        dir ("${WORKSPACE}/packer"){
-                            sh "packer build -var 'jenkins_build_id=${env.BUILD_NUMBER}' -var 'app_version=${env.APP_VERSION}' . | tee build.log"
-                            sh "tail -1 build.log |  rev | awk '{print \$1}' | rev > artifact.txt"
-                            ARTIFACT = sh  ( script: 'cat artifact.txt', returnStdout:true).trim()
-                        }
-                    } catch (Exception err){
-                        currentBuild.result = 'FAILED'
+                    dir ("${WORKSPACE}/packer"){
+                        sh "set +e; packer build -var 'jenkins_build_id=${env.BUILD_NUMBER}' -var 'app_version=${env.APP_VERSION}' . ; echo \$? > status"
+                        def exitCode = readFile('status').trim()
+                        echo "Packer build Exit Code: ${exitCode}"
+                            if (exitCode == "0") {
+                                currentBuild.result = 'SUCCESS'
+                            }
+                            if (exitCode =! "0") {
+                                currentBuild.result = 'FAILURE'
+                            }
                     }
                 }
             }
