@@ -50,7 +50,7 @@ pipeline {
                             if (exitCode == "0") {
                                 currentBuild.result = 'SUCCESS'
                             }
-                            if (exitCode =! "0") {
+                            if (exitCode != "0") {
                                 currentBuild.result = 'FAILURE'
                             }
                     }
