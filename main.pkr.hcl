@@ -68,7 +68,7 @@ build {
   
   provisioner "shell" {
     inline = [
-        "sleep 2",
+        "sleep 3",
         "sudo yum update -y"
     ]
   }

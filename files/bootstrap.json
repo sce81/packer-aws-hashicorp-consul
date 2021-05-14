@@ -1,7 +1,7 @@
 {
     "bootstrap": false,
     "server": true,
-    "datacenter": "AVAILABILITY_ZONE",
+    "datacenter": "AVAILABILITYZONE",
     "data_dir": "/var/consul",
     "encrypt": "ENCRYPTIONKEY",
     "log_level": "INFO",
