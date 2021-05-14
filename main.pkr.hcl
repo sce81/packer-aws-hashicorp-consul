@@ -63,7 +63,7 @@ build {
   
   provisioner "file" {
     source      = "files/bootstrap.json"
-    destination = "/etc/consul.d/bootstrap/config.json"
+    destination = "/tmp/config.json"
   }
   
   provisioner "shell" {
@@ -89,6 +89,7 @@ build {
         "sudo adduser consul",
         "sudo mkdir -p /etc/consul.d/{bootstrap,server,client}",
         "sudo mkdir /var/consul",
+        "sudo mv /tmp/config.json /etc/consul.d/bootstrap/config.json",
         "sudo chown -R consul:consul /var/consul"
     ]
   }
