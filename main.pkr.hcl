@@ -78,4 +78,16 @@ build {
               "echo 'region = REGION' >> ~/.aws/config"
     ]
   }
+  provisioner "shell" {
+    inline = [
+        "sudo adduser consul",
+        "mkdir -p /etc/consul.d/{bootstrap,server,client}",
+        "mkdir /var/consul",
+        "sudo chown consul:consul /var/consul"
+    ]
+  }
+  provisioner "file" {
+    source      = "files/bootstrap.json"
+    destination = "/etc/consul.d/bootstrap/config.json"
+  }
 }
