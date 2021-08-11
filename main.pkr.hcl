@@ -23,22 +23,22 @@ source "amazon-ebs" "main" {
 
   vpc_filter {
       filters = {
-          "tag:Name": "sandbox1-main-vpc"
+          "tag:Name": var.vpc_tagName
       }
   }
 
   subnet_filter {
     random = true
     filters = {
-        "tag:Environment": "sandbox1",
-        "tag:Name": "sandbox1-core-*"
+        "tag:Environment": var.subnet_tagEnvironment,
+        "tag:Name": var.subnet_tagName
     }
   }  
 
   security_group_filter {
       filters = {
-          "vpc-id": "vpc-046340e71f03ad85e"
-          "group-id": "sg-07d5022d92074a96a",
+          "vpc-id": var.sg_tagVPC
+          "group-id": var.sg_tagGroup
       }
   }
 
