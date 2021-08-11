@@ -49,7 +49,7 @@ source "amazon-ebs" "main" {
         AppVersion        = var.app_version
         Environment       = var.env
         SourceAMI         = "{{ .SourceAMIName }}"
-        ManagedBy         = "Rackspace"
+        ManagedBy         = var.managedby
         JenkinsBuildID    = var.jenkins_build_id
     }
 
