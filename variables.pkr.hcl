@@ -33,3 +33,28 @@ variable "jenkins_build_id" {
     description     = "Jenkins Build Number"
     sensitive       = false
 }
+variable "vpc_tagName" {
+    default         = "0000"
+    description     = "VPC Tag for Filtering"
+    sensitive       = false
+}
+variable "subnet_tagEnvironment" {
+    default         = "0000"
+    description     = "Subnet Tag for Filtering"
+    sensitive       = false
+}
+variable "subnet_tagName" {
+    default         = "0000"
+    description     = "Subnet Tag for Filtering"
+    sensitive       = false
+}
+variable "sg_tagVPC" {
+    default         = "0000"
+    description     = "Security Group Tag for Filtering"
+    sensitive       = false
+}
+variable "sg_tagGroup" {
+    default         = "0000"
+    description     = "Security Group Tag for Filtering"
+    sensitive       = false
+}
